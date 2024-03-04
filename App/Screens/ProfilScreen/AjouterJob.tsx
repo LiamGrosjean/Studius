@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import { Picker, PickerItemProps } from '@react-native-picker/picker';
+import { View, Text, TextInput } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
+import Colors from '../../Utils/Colors';
+import { FlatList } from 'react-native';
+import { Header } from '@react-navigation/stack';
 
 const AjouterJob = () => {
     const [ajoutjob, setAjoutjob] = useState('');
@@ -9,6 +13,28 @@ const AjouterJob = () => {
     const [ajoutjob_duree, setAjoutjobDuree] = useState('');
     const [ajoutjob_tarif, setAjoutjobTarif] = useState('');
     const token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE3MDk0ODE5NzksImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbHQ3NDNzZG8wbWx3MDd1czJhcXZlbHZ1L21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LWFwLXNvdXRoZWFzdC0yLmh5Z3JhcGguY29tLyIsInN1YiI6IjA0YzZmYzM2LTdiNjYtNDdiYy04ZmFmLTc4YmU5YmM2NjNmZCIsImp0aSI6ImNsdGJwZmxkczBqc2kwNzJxZWdnejA0eW4ifQ.ZhbLRATjaBePjfjJYYUR6AaezWWDdKF4iQQEhA9KYRC77QwXHuH-SvTy72FNZngmjLxMdeFhHIQLvrC96FKEzei_kCy71KlHaKzfsJJDVHRI4hcxiTYufvlsLtb8baLhZLUKMUfV4XxY0WnFjGMJc0YGe4TVSonkgnNAOGtQEBQ__V30Fos8Sq8oHTEpGkCJfLkLfZX4i7DTnYk-S1jstP52dtxQSAle8D9JGdjuNZf6bbUNXpg7_85ltO-jN96DIImPVbr5bRLaL9kCmysyT1ewM8VhIJv_SYL_4sMVD_9GfG__2rMwbNtGC34GIED0Gqrzu2wvW832hYrRYp2DKi4egb7gwr26G-grEKKtuDl0wL3wL2O_zBk3Ky8lp5x7IVZv06sKpocq_70hBdGrsX82O0ZlapWuxk3-9Nzoy0WiMNyfrI-zrdkDpgllgjyi8gP3IkiwM53kcpPjWddSXrYxNB4egpIpOXjwVZHzlrCCtguDQxLLc6tASa1DL2eqhWZZv2lDFfJt4c29P2YiL9cQqKyyDjaooVfdw_jdGFDUbcK3jdlgpkstgfYlyDaDFdV9SlhM0m9T-Y-Qo9RtOr8wCAjY3SXIJuOEpyTuTz1gXG25iD3RzuP6XtP6YVsg1cZQPoybnVqD9Hlo-xrtzHnj2fcZuXu3Z-ZFdCrBlLo";
+
+    const [categories, setCategories] = useState([
+        { id: '1', label: 'Communication', active: false },
+        { id: '2', label: 'Restauration', active: false },
+        { id: '3', label: 'Design', active: false },
+        { id: '4', label: 'Aide à domicile', active: false },
+        { id: '5', label: 'Livraison', active: false },
+        { id: '6', label: 'Ajouter', active: false },
+    ]);
+
+    const renderItem = ({ item }) => (
+        <TouchableOpacity
+            style={[styles.pill, { backgroundColor: item.active ? '#FFE0E1' : '#D8DCF2' }]}
+            onPress={() => {
+                const updatedCategories = categories.map(cat =>
+                    cat.id === item.id ? { ...cat, active: !cat.active } : cat
+                );
+                setCategories(updatedCategories);
+            }}>
+            <Text style={{ color: item.active ? Colors.light.accent : Colors.light.primary }}>{item.label}</Text>
+        </TouchableOpacity>
+    );
 
     const saveData = async () => {
         try {
@@ -71,37 +97,97 @@ const AjouterJob = () => {
     };
 
     return (
-        <View>
-            <Text>Ajouter un Job</Text>
+        <View style={styles.container}>
+            <Text style={styles.label}>Ajouter un Job</Text>
             <TextInput
+            style={styles.input}
                 placeholder="Entrer le nom du Job"
                 value={ajoutjob}
                 onChangeText={(text) => setAjoutjob(text)}
             />
+            <Text style={styles.label}>Localisation</Text>
             <TextInput
-                placeholder="Entrer la description du Job"
-                value={ajoutjob_desc}
-                onChangeText={(text) => setAjoutjobDesc(text)}
-            />
-            <TextInput
+            style={styles.input}
                 placeholder="Entrer la localisation du Job"
                 value={ajoutjob_loc}
                 onChangeText={(text) => setAjoutjobLoc(text)}
             />
-            <Text>Catégorie</Text>
+            <Text style={styles.label}>Catégorie</Text>
+            <FlatList
+                data={categories}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{marginTop: 8, overflow: 'visible'}}
+            />
+            <Text style={styles.label}>Durée</Text>
             <TextInput
-                placeholder="Entrer la durée du Job"
+            style={styles.input}
+                placeholder="Entrer le nombre d'heure par semaine"
                 value={ajoutjob_duree}
                 onChangeText={(text) => setAjoutjobDuree(text)}
             />
+            <Text style={styles.label}>Tarif Horaire</Text>
             <TextInput
+            style={styles.input}
                 placeholder="Entrer le tarif horaire du Job"
                 value={ajoutjob_tarif}
                 onChangeText={(text) => setAjoutjobTarif(text)}
             />
-            <Button title="Créer le Job" onPress={saveData} />
+            <Text style={styles.label}>Description</Text>
+            <TextInput
+            style={styles.input}
+                placeholder="Entrer la description du Job"
+                value={ajoutjob_desc}
+                onChangeText={(text) => setAjoutjobDesc(text)}
+            />
+            <TouchableOpacity 
+            onPress={() => {
+            console.log("Le BOUTTON a été PRESSE"); // Message console pour vérifier si le bouton est pressé
+            saveData();}} 
+            style={styles.buttonWrapper}>
+                <Text style={styles.buttonText}>Créer le Job</Text>
+            </TouchableOpacity>
         </View>
     );
 };
 
 export default AjouterJob;
+
+const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 33,
+        backgroundColor: Colors.light.background,
+    },
+    input: {
+        padding: 15,
+        marginTop: 8,
+        borderRadius: 5,
+        backgroundColor: '#F3F4FB'
+    },
+    pill: {
+        borderRadius: 666,
+        paddingVertical: 7,
+        paddingHorizontal: 14,
+        marginRight: 10,
+    },
+    label: {
+        fontSize: 14,
+        color: Colors.light.primary,
+        marginTop: 16,
+    },
+    buttonWrapper: {
+        backgroundColor: Colors.light.accent,
+        paddingVertical: 14,
+        marginHorizontal: 'auto',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginTop: 41,
+      },
+      buttonText: {
+        color: Colors.light.background,
+        fontSize: 16,
+        fontWeight: '600',
+      },
+})

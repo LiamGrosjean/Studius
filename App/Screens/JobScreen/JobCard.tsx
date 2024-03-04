@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import DetailJobScreen from '../DetailJobScreen/DetailJobScreen';
 
 const JobCard = ({ maxWidth, title = 'UX/UI Designer', company = 'UFR Ingemedia', description = 'Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit', emplacement = 'Toulon', hSemaine = '20H/sem', hSalaire = '€15/h' }) => {
 

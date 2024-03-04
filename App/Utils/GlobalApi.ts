@@ -4,7 +4,7 @@ const MASTER_URL='https://api-ap-southeast-2.hygraph.com/v2/clt743sdo0mlw07us2aq
 const getJobs = async () => {
     const query = gql`
         query getJob {
-            jobs {
+            jobs(orderBy: updatedAt_DESC) {
             titre
             jobDescription
             jobLocation
