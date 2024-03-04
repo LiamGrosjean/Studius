@@ -14,7 +14,8 @@ const JobCard = ({ maxWidth, id, title = 'UX/UI Designer', company = 'UFR Ingeme
     setIsBookmarked(!isBookmarked);
   };
   
-  const truncatedDescription = description.length > 140 ? description.substring(0, 140) + '...' : description;
+  const truncatedDescription = description.length > 130 ? description.substring(0, 130) + '...' : description;
+  const truncatedTitle = title.length > 40 ? title.substring(0, 40) + '...' : title;
 
     return (
       <TouchableOpacity onPress={() => { navigation.push('DetailJobScreen',{idJob:id})}}>
@@ -25,7 +26,7 @@ const JobCard = ({ maxWidth, id, title = 'UX/UI Designer', company = 'UFR Ingeme
                           <Image source={require('../../../assets/images/suggestion-image.png')} style={{ width: 30, height: 30, borderRadius: 9999 }} />
                         </View>
                         <View style={styles.textContainer}>
-                            <Text style={styles.title}>{title}</Text>
+                            <Text style={styles.title}>{truncatedTitle}</Text>
                             <Text style={styles.subtitle}>{company}</Text>
                         </View>
                     </View>
@@ -64,13 +65,12 @@ const styles = StyleSheet.create({
     width: '100%', 
     maxWidth: 226,
     marginTop: 10,
+    position: 'relative',
   },
   subContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    gap: 48,
-    position: 'relative',
   },
   brandContainer: {
     flexDirection: 'row',
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     color: '#242C5D',
     fontSize: 16,
     fontWeight: '600',
+    flexWrap: 'wrap',
   },
   subtitle: {
     color: '#696969',
