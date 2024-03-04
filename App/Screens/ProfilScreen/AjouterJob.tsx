@@ -37,6 +37,31 @@ const AjouterJob = () => {
             console.log(data); // Affichez les données retournées par l'API
             if (result.ok) {
                 console.log("Le job a été ajouté");
+                // Récupérer l'id du job nouvellement ajouté
+                const jobId = data.data.createJob.id;
+                // Mettre à jour le statut du job en publié (publié)
+                const updateResult = await fetch("https://api-ap-southeast-2.hygraph.com/v2/clt743sdo0mlw07us2aqvelvu/master", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        query: `mutation {
+                            publishJob(
+                                where: { id: "${jobId}" }, to: PUBLISHED) {
+                                id
+                            }
+                        }`
+                    })
+                });
+                const updateData = await updateResult.json();
+                console.log(updateData);
+                if (updateResult.ok) {
+                    console.log("Le job a été publié avec succès");
+                } else {
+                    console.error("Erreur lors de la publication du job:", updateData.error);
+                }
             } else {
                 console.error("Erreur lors de l'ajout du job:", data.error);
             }

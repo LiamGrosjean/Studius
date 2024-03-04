@@ -1,9 +1,7 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { FontAwesome5 } from '@expo/vector-icons';
-import { faMapPin } from '@fortawesome/free-solid-svg-icons';
-import Title from '../../Screens/HomeScreen/title';
+import Colors from '../../Utils/Colors';
 
 
 export default function  AProposContent(){
@@ -28,16 +26,14 @@ export default function  AProposContent(){
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 16,
     },
     scrollContainer: {
       justifyContent: 'center',
     },
     text: {
       fontSize: 15,
-      marginLeft : 10,
-      color: '#242C5D'
-    },
+      color: Colors.light.primary,
+  },
   });
   
 
