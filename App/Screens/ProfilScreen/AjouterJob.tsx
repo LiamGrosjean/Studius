@@ -4,7 +4,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import Colors from '../../Utils/Colors';
 import { FlatList } from 'react-native';
-import { Header } from '@react-navigation/stack';
+import Header from '../HomeScreen/header';
 
 const AjouterJob = () => {
     const [ajoutjob, setAjoutjob] = useState('');
@@ -97,6 +97,8 @@ const AjouterJob = () => {
     };
 
     return (
+        <ScrollView>
+            <Header />
         <View style={styles.container}>
             <Text style={styles.label}>Ajouter un Job</Text>
             <TextInput
@@ -150,6 +152,7 @@ const AjouterJob = () => {
                 <Text style={styles.buttonText}>Créer le Job</Text>
             </TouchableOpacity>
         </View>
+        </ScrollView>
     );
 };
 
@@ -157,8 +160,11 @@ export default AjouterJob;
 
 const styles = StyleSheet.create({
     container: {
+        position: 'relative',
+        top: 0,
         paddingHorizontal: 33,
         backgroundColor: Colors.light.background,
+        paddingBottom: 30,
     },
     input: {
         padding: 15,

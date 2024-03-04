@@ -3,13 +3,34 @@ import React, { ReactNode, useState} from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Map from './map';
-import { useNavigation } from '@react-navigation/native';
 import AProposContent from './AProposContent';
 import CompetencesContent from './CompetencesContent';
 import DescriptionContent from './DescriptionContent';
 import Colors from '../../Utils/Colors';
+import GlobalApi from '../../Utils/GlobalApi';
+import { useEffect } from 'react';
+import { FlatList } from 'react-native-gesture-handler';
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const DetailJobScreen = () => {
+
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const result: any = await GlobalApi.getJobs();
+        setJobs(result.jobs);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+  
+    fetchJobs();
+  }, []);
+
+
+
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState('Description');
   const [content, setContent] = useState<ReactNode | null>(null);
@@ -23,6 +44,7 @@ const DetailJobScreen = () => {
       case 'Description':
         return (
           <View style={styles.DescriptionContainer}>
+            <Text>{param.idJob}</Text>
             <DescriptionContent />
           </View>
         );
@@ -48,7 +70,7 @@ const DetailJobScreen = () => {
         return null;
     }
   };
-
+  const param = useRoute().params
   return (
     <View style={styles.container}>
       <View style={styles.header}>

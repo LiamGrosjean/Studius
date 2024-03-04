@@ -31,6 +31,7 @@ const JobScreen = () => {
                             emplacement='Remote'
                             hSemaine='35H/sem'
                             hSalaire='€30/h'
+                            id='1'
                         />
                         <JobCard 
                         maxWidth={256} 

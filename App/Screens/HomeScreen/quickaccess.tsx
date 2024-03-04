@@ -36,7 +36,7 @@ const Quickaccess = () => {
 
 const styles = StyleSheet.create({
     tilesWrapper: {
-        gap: 5,
+        gap: 14,
         marginTop: 19,
         display: 'flex',
         flexDirection: 'row',

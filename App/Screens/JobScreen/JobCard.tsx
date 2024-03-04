@@ -6,7 +6,7 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-const JobCard = ({ maxWidth, title = 'UX/UI Designer', company = 'UFR Ingemedia', description = 'Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit', emplacement = 'Toulon', hSemaine = '20H/sem', hSalaire = '€15/h' }) => {
+const JobCard = ({ maxWidth, id, title = 'UX/UI Designer', company = 'UFR Ingemedia', description = 'Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit', emplacement = 'Toulon', hSemaine = '20H/sem', hSalaire = '€15/h' }) => {
 
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -17,7 +17,7 @@ const JobCard = ({ maxWidth, title = 'UX/UI Designer', company = 'UFR Ingemedia'
   const truncatedDescription = description.length > 140 ? description.substring(0, 140) + '...' : description;
 
     return (
-      <TouchableOpacity onPress={() => { navigation.push('DetailJobScreen')}}>
+      <TouchableOpacity onPress={() => { navigation.push('DetailJobScreen',{idJob:id})}}>
             <View style={[styles.container, { maxWidth }]}>
                 <View style={styles.subContainer}>
                     <View style={styles.brandContainer}>
