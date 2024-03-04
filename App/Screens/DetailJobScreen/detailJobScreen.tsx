@@ -2,13 +2,13 @@ import { View, Text, TouchableOpacity, GestureResponderEvent } from 'react-nativ
 import React, { ReactNode, useState } from 'react'
 import { StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import Map from '../DetailJobScreen/map';
+import Map from './map';
 import { useNavigation } from '@react-navigation/native';
-import AProposContent from '../DetailJobScreen/AProposContent';
-import CompetencesContent from '../DetailJobScreen/CompetencesContent';
-import DescriptionContent from '../DetailJobScreen/DescriptionContent';
+import AProposContent from './AProposContent';
+import CompetencesContent from './CompetencesContent';
+import DescriptionContent from './DescriptionContent';
 
-const detailJob = () => {
+const DetailJobScreen = () => {
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState('Description');
   const [content, setContent] = useState<ReactNode | null>(null);
@@ -266,4 +266,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default detailJob;
+export default DetailJobScreen;

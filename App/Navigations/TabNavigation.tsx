@@ -4,10 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from '../Utils/Colors';
 import MessagerieScreen from '../Screens/MessagerieScreen/MessagerieScreen';
 import LogementScreen from '../Screens/LogementsScreen/LogementScreen';
-import JobScreen from '../Screens/JobScreen/JobScreen';
-import HomeScreen from '../Screens/HomeScreen/HomeScreen';
 import { FontAwesome,FontAwesome5 } from '@expo/vector-icons';
 import HomeNavigation from './HomeNavigation';
+import JobNavigation from './JobNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +47,7 @@ export default function TabNavigation() {
             return <FontAwesome name="briefcase" size={size} color={color} />
           }
         }}
-        component={JobScreen}
+        component={JobNavigation}
         />
       <Tab.Screen 
         name='logements' 
