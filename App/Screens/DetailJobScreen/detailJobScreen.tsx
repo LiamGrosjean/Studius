@@ -1,12 +1,13 @@
 import { View, Text, TouchableOpacity, GestureResponderEvent } from 'react-native'
-import React, { ReactNode, useState } from 'react'
-import { StyleSheet } from 'react-native';
+import React, { ReactNode, useState} from 'react'
+import { StyleSheet, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Map from './map';
 import { useNavigation } from '@react-navigation/native';
 import AProposContent from './AProposContent';
 import CompetencesContent from './CompetencesContent';
 import DescriptionContent from './DescriptionContent';
+import Colors from '../../Utils/Colors';
 
 const DetailJobScreen = () => {
   const navigation = useNavigation();
@@ -69,6 +70,7 @@ const DetailJobScreen = () => {
 
       <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 15 }}>
         <View style={styles.cercle}>
+          <Image source={require('../../../assets/images/suggestion-image.png')} style={{ width: 70, height: 70, borderRadius: 9999 }} />
         </View>
 
         <View style={styles.titleC}>
@@ -137,6 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 8,
+    backgroundColor: Colors.light.background
   },
   titre: {
     fontSize: 15,

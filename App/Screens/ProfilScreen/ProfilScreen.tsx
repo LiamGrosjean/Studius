@@ -7,6 +7,7 @@ import Colors from '../../Utils/Colors'
 import Header from '../HomeScreen/header'
 import {useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import ajouterJob from '../../Screens/ProfilScreen/AjouterJob'
 
 const ProfileScreen = () => {
     const navigation = useNavigation<StackNavigationProp<any>>();
@@ -30,6 +31,7 @@ const ProfileScreen = () => {
        
        
         <View>
+        <Button title='Ajouter un job' onPress={() => navigation.push('AjouterJob')} />
         <Button title='Se connecter' onPress={() => navigation.push('login')} />
         <Button title='Se déconnecter' onPress={() => signOut()} />
         </View>

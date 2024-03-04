@@ -14,7 +14,7 @@ export default function HomeNavigation() {
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="mes-candidatures" component={MesCandidatures} />
       <Stack.Screen name="jobs" component={JobScreen} />
-      <Stack.Screen name="detailJobScreen" component={DetailJobScreen} />
+      <Stack.Screen name="DetailJobScreen" component={DetailJobScreen} />
     </Stack.Navigator>
   )
 }
