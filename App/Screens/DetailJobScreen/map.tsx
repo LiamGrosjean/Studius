@@ -3,7 +3,6 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { FontAwesome5 } from '@expo/vector-icons';
-import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import { useRoute } from '@react-navigation/native';
 import GlobalApi from '../../Utils/GlobalApi';
 
