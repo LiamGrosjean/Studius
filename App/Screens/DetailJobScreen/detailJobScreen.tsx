@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, GestureResponderEvent } from 'react-native'
-import React, { ReactNode, useState} from 'react'
+import React, { ReactNode, useState, useEffect } from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Map from './map';
@@ -8,34 +8,33 @@ import CompetencesContent from './CompetencesContent';
 import DescriptionContent from './DescriptionContent';
 import Colors from '../../Utils/Colors';
 import GlobalApi from '../../Utils/GlobalApi';
-import { useEffect } from 'react';
-import { FlatList } from 'react-native-gesture-handler';
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const DetailJobScreen = () => {
+  const navigation = useNavigation();
+  const param = useRoute().params;
 
-  const [jobs, setJobs] = useState([]);
+  const [selectedTab, setSelectedTab] = useState('Description');
+  const [content, setContent] = useState<ReactNode | null>(null);
+  const [jobDetails, setJobDetails] = useState<any>(null);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchJobDetails = async () => {
       try {
         const result: any = await GlobalApi.getJobs();
-        setJobs(result.jobs);
+        const job = result.jobs.find((job: any) => job.id === param.idJob);
+        if (job) {
+          setJobDetails(job);
+        }
       } catch (error) {
-        console.error("Error fetching jobs:", error);
+        console.error("Error fetching job details:", error);
       }
     };
   
-    fetchJobs();
-  }, []);
+    fetchJobDetails();
+  }, [param.idJob]);
 
-
-
-  const navigation = useNavigation();
-  const [selectedTab, setSelectedTab] = useState('Description');
-  const [content, setContent] = useState<ReactNode | null>(null);
-
-  const handleTabPress = (tabName: React.SetStateAction<string>) => {
+  const handleTabPress = (tabName: string) => {
     setSelectedTab(tabName);
   };
 
@@ -44,7 +43,10 @@ const DetailJobScreen = () => {
       case 'Description':
         return (
           <View style={styles.DescriptionContainer}>
-            <Text>{param.idJob}</Text>
+            <Text>{jobDetails?.titre}</Text>
+            <Text>{jobDetails?.jobDescription}</Text>
+            <Text>{jobDetails?.companyName}</Text>
+            <Text>{jobDetails?.jobSalary}</Text>
             <DescriptionContent />
           </View>
         );
@@ -70,7 +72,7 @@ const DetailJobScreen = () => {
         return null;
     }
   };
-  const param = useRoute().params
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>

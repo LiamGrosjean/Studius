@@ -28,7 +28,7 @@ const JobScreen = () => {
   return (
     <View>
       <Header/>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <Search />
             <View style={styles.container}>
                 <View>

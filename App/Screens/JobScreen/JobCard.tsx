@@ -6,7 +6,7 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-const JobCard = ({ maxWidth, id, title = 'UX/UI Designer', company = 'UFR Ingemedia', description = 'Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit', emplacement = 'Toulon', hSemaine = '20H/sem', hSalaire = '€15/h' }) => {
+const JobCard = ({ maxWidth, id, title, company, description, emplacement, hSemaine, hSalaire}) => {
 
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [isBookmarked, setIsBookmarked] = useState(false);
