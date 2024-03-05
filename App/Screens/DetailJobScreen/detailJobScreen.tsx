@@ -85,9 +85,6 @@ const DetailJobScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-
-
-
       <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 15 }}>
         <View style={styles.cercle}>
           <Image source={require('../../../assets/images/suggestion-image.png')} style={{ width: 70, height: 70, borderRadius: 9999 }} />
