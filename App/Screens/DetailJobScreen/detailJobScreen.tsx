@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, GestureResponderEvent } from 'react-native'
+import { View, Text, TouchableOpacity, GestureResponderEvent, Modal, Button } from 'react-native'
 import React, { ReactNode, useState, useEffect } from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -10,7 +10,9 @@ import Colors from '../../Utils/Colors';
 import GlobalApi from '../../Utils/GlobalApi';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+
 const DetailJobScreen = () => {
+  const [isPopupVisible, setPopupVisible] = useState(false);
   const navigation = useNavigation();
   const param = useRoute().params;
 
@@ -30,7 +32,7 @@ const DetailJobScreen = () => {
         console.error("Error fetching job details:", error);
       }
     };
-  
+
     fetchJobDetails();
   }, [param.idJob]);
 
@@ -74,7 +76,7 @@ const DetailJobScreen = () => {
       <View style={styles.header}>
         <View style={styles.leftContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <FontAwesome5 name='chevron-left' size={15} />
+            <FontAwesome5 name='chevron-left' size={15} color='#242C5D' />
           </TouchableOpacity>
         </View>
 
@@ -102,6 +104,8 @@ const DetailJobScreen = () => {
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
           <Text style={{ marginRight: 5, color: '#242C5D' }}>{jobDetails?.jobHours}</Text>
+          <Text style={{ marginRight: 5, color: '#242C5D', fontSize: 10, marginTop: 7 }}>/Semaine</Text>
+
           <View style={{ marginRight: 5, marginBottom: 2 }}>
             <FontAwesome5 name="circle" size={3} color='#D62528' solid />
           </View>
@@ -110,15 +114,40 @@ const DetailJobScreen = () => {
             <FontAwesome5 name="circle" size={3} color="#D62528" solid />
           </View>
           <Text style={{ color: '#242C5D' }}>{"10 "}</Text>
-          <Text style={{ color: '#242C5D' , fontSize:10 , marginTop:7 }}>candidature</Text>
+          <Text style={{ color: '#242C5D', fontSize: 10, marginTop: 7 }}>candidature</Text>
 
 
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '450'}}>{jobDetails?.jobSalary}</Text>
+          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '450' }}>{jobDetails?.jobSalary}</Text>
           <Text style={{ color: '#242C5D' }}>/Hr</Text>
         </View>
+      </View>
+      <View style={{ position: "absolute", bottom: 10, zIndex: 1 }}>
+      <TouchableOpacity
+        style={styles.buttonWrapper}
+        onPress={() => setPopupVisible(true)}
+      >
+        <Text style={styles.buttonText}>Postuler</Text>
+      </TouchableOpacity>
+        <Modal
+          visible={isPopupVisible}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setPopupVisible(false)}
+          >
+          <View style={styles.modal}>
+            <View  style={styles.sousmodal}>
+              <Text style={{ fontSize:16 ,    fontWeight: '600',    color: '#242C5D' }}>Candidature envoyée</Text>
+              <Text  style={{color: '#242C5D' }}>Votre candidature a bien été envoyée à</Text>
+              <Text  style={{ fontSize:14 ,    fontWeight: '600' ,     color: '#242C5D' }}>{jobDetails?.companyName}</Text>
+              <TouchableOpacity onPress={() => setPopupVisible(false)}>
+                <Text style={{ color: 'blue', marginTop: 10 }}>Fermer</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </View>
       <View>
 
@@ -137,18 +166,20 @@ const DetailJobScreen = () => {
               <TouchableOpacity onPress={() => handleTabPress('Carte')}>
                 <Text style={[styles.infoBar, selectedTab === 'Carte' ? styles.selected : null]}>Carte</Text>
               </TouchableOpacity>
-   
-                  
+
+
             </View>
 
-          
+
           </View>
-          
+
           <View >
-                {renderContent()}
-              </View>  
+            {renderContent()}
+          </View>
         </View>
+
       </View>
+
     </View>
   );
 };
@@ -159,7 +190,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 8,
-    backgroundColor: Colors.light.background
+    backgroundColor: Colors.light.background,
+    position: 'relative',
   },
   titre: {
     fontSize: 15,
@@ -261,32 +293,58 @@ const styles = StyleSheet.create({
   },
   MapContainer: {
     width: "80%",
-    height:   "70%",
-    marginTop:10,
+    height: "70%",
+    marginTop: 10,
     marginLeft: "10%",
     marginRight: "5%",
   },
-  CompetenceContainer: { 
-  width: "80%",
-  height: "77%",
-  marginTop:3,
-  marginLeft: "10%",
-  marginRight: "5%",
-},
+  CompetenceContainer: {
+    width: "80%",
+    height: "77%",
+    marginTop: 3,
+    marginLeft: "10%",
+    marginRight: "5%",
+  },
   DescriptionContainer: {
     width: "80%",
     height: "77%",
-    marginTop:3,
+    marginTop: 3,
     marginLeft: "10%",
     marginRight: "5%",
   },
-  AproposContainer:{ 
-  width: "80%",
-  height: "77%",
-  marginTop:3,
-  marginLeft: "10%",
-  marginRight: "5%",
-},
+  AproposContainer: {
+    width: "80%",
+    height: "77%",
+    marginTop: 3,
+    marginLeft: "10%",
+    marginRight: "5%",
+  },
+  buttonWrapper: {
+    backgroundColor: Colors.light.accent,
+    paddingVertical: 14,
+    marginHorizontal: 'auto',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginTop: 41,
+    padding: "40%",
+  },
+  buttonText: {
+    color: Colors.light.background,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  modal: {
+    flex: 1, 
+    justifyContent: 'flex-end',
+     backgroundColor: 'rgba(0, 0, 0, 0.5)' ,
+
+  },
+  sousmodal: {
+    backgroundColor: 'white', 
+    padding: '40%', 
+    borderRadius: 15, 
+    alignItems: 'center' 
+  },
 
 })
 
