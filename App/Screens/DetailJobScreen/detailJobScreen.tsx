@@ -9,6 +9,7 @@ import DescriptionContent from './DescriptionContent';
 import Colors from '../../Utils/Colors';
 import GlobalApi from '../../Utils/GlobalApi';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 
 const DetailJobScreen = () => {
@@ -107,7 +108,7 @@ const DetailJobScreen = () => {
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
           <Text style={{ marginRight: 5, color: '#242C5D' }}>{jobDetails?.jobHours}</Text>
-          <Text style={{ marginRight: 5, color: '#242C5D', fontSize: 10, marginTop: 7 }}>/Semaine</Text>
+          <Text style={{ marginRight: 5, color: '#242C5D', fontSize: 10 }}>/Semaine</Text>
 
           <View style={{ marginRight: 5, marginBottom: 2 }}>
             <FontAwesome5 name="circle" size={3} color='#D62528' solid />
@@ -117,7 +118,7 @@ const DetailJobScreen = () => {
             <FontAwesome5 name="circle" size={3} color="#D62528" solid />
           </View>
           <Text style={{ color: '#242C5D' }}>{"10 "}</Text>
-          <Text style={{ color: '#242C5D', fontSize: 10, marginTop: 7 }}>candidature</Text>
+          <Text style={{ color: '#242C5D', fontSize: 10 }}>candidature</Text>
 
 
         </View>
@@ -128,26 +129,36 @@ const DetailJobScreen = () => {
         </View>
       </View>
       <View style={{ position: "absolute", bottom: 10, zIndex: 1 }}>
-      <TouchableOpacity
-        style={styles.buttonWrapper}
-        onPress={() => setPopupVisible(true)}
-      >
-        <Text style={styles.buttonText}>Postuler</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonWrapper}
+          onPress={() => setPopupVisible(true)}
+        >
+          <Text style={styles.buttonText}>Postuler</Text>
+        </TouchableOpacity>
         <Modal
           visible={isPopupVisible}
           animationType="slide"
           transparent={true}
           onRequestClose={() => setPopupVisible(false)}
-          >
-          <View style={styles.modal}>
-            <View  style={styles.sousmodal}>
-              <Text style={{ fontSize:16 ,    fontWeight: '600',    color: '#242C5D' }}>Candidature envoyée</Text>
-              <Text  style={{color: '#242C5D' }}>Votre candidature a bien été envoyée à</Text>
-              <Text  style={{ fontSize:14 ,    fontWeight: '600' ,     color: '#242C5D' }}>{jobDetails?.companyName}</Text>
-              <TouchableOpacity onPress={() => setPopupVisible(false)}>
-                <Text style={{ color: 'blue', marginTop: 10 }}>Fermer</Text>
+        >
+          <View style={styles.sousmodal}>
+            <View style={styles.modal}>
+              <View style={{ alignItems: 'center' }}>
+                <FontAwesome5 name="grip-lines" size={30} color="#242C5D" onPress={() => setPopupVisible(false)} />
+                <Image source={require('../../../assets/images/verification.png')} style={{ width: 100, height: 100, borderRadius: 9999 }} />
+              </View>
+              <Text style={{ fontSize: 16, fontWeight: '600', color: '#242C5D', width: '100%', textAlign: 'center' }}>Candidature envoyée</Text>
+              <Text style={{ color: '#242C5D', width: '100%', textAlign: 'center' }}>Votre candidature a bien été envoyée à</Text>
+              <Text style={{ fontSize: 14, fontWeight: '600', color: '#242C5D', width: '100%', textAlign: 'center' }}>{jobDetails?.companyName}</Text>
+              <TouchableOpacity
+                style={styles.buttonWrapperModal}
+                onPress={() => navigation.navigate('MesCandidatures')}
+              >
+                <Text style={styles.buttonTextModal}>Afficher mes candidatures</Text>
               </TouchableOpacity>
+           
+
+
             </View>
           </View>
         </Modal>
@@ -335,20 +346,35 @@ const styles = StyleSheet.create({
     color: Colors.light.background,
     fontSize: 16,
     fontWeight: '600',
-  },
-  modal: {
-    flex: 1, 
-    justifyContent: 'flex-end',
-     backgroundColor: 'rgba(0, 0, 0, 0.5)' ,
-
+    textAlign: 'center',
   },
   sousmodal: {
-    backgroundColor: 'white', 
-    padding: '40%', 
-    borderRadius: 15, 
-    alignItems: 'center' 
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    width: '100%',
   },
-
+  modal: {
+    backgroundColor: 'white',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+    height: '70%',
+  },
+  buttonTextModal: {
+    color: Colors.light.background,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  buttonWrapperModal: {
+    backgroundColor: Colors.light.accent,
+    paddingVertical: 14,
+    marginHorizontal: 'auto',
+    borderRadius: 5,
+    marginTop: 41,
+    paddingHorizontal: "20%"
+  }
 })
 
 export default DetailJobScreen;

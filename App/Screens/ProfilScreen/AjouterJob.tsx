@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import Colors from '../../Utils/Colors';
 import { FlatList } from 'react-native';
 import Header from '../HomeScreen/header';
+import { useNavigation } from '@react-navigation/native';
 
 const AjouterJob = () => {
     const [ajoutjob, setAjoutjob] = useState('');
@@ -35,7 +36,6 @@ const AjouterJob = () => {
             <Text style={{ color: item.active ? Colors.light.accent : Colors.light.primary }}>{item.label}</Text>
         </TouchableOpacity>
     );
-
     const saveData = async () => {
         try {
             const result = await fetch("https://api-ap-southeast-2.hygraph.com/v2/clt743sdo0mlw07us2aqvelvu/master", {
@@ -95,63 +95,78 @@ const AjouterJob = () => {
             console.error("Erreur lors de la requête:", error);
         }
     };
-
     return (
         <ScrollView>
             <Header />
-        <View style={styles.container}>
-            <Text style={styles.label}>Ajouter un Job</Text>
-            <TextInput
-            style={styles.input}
-                placeholder="Entrer le nom du Job"
-                value={ajoutjob}
-                onChangeText={(text) => setAjoutjob(text)}
-            />
-            <Text style={styles.label}>Localisation</Text>
-            <TextInput
-            style={styles.input}
-                placeholder="Entrer la localisation du Job"
-                value={ajoutjob_loc}
-                onChangeText={(text) => setAjoutjobLoc(text)}
-            />
-            <Text style={styles.label}>Catégorie</Text>
-            <FlatList
-                data={categories}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                style={{marginTop: 8, overflow: 'visible'}}
-            />
-            <Text style={styles.label}>Durée</Text>
-            <TextInput
-            style={styles.input}
-                placeholder="Entrer le nombre d'heure par semaine"
-                value={ajoutjob_duree}
-                onChangeText={(text) => setAjoutjobDuree(text)}
-            />
-            <Text style={styles.label}>Tarif Horaire</Text>
-            <TextInput
-            style={styles.input}
-                placeholder="Entrer le tarif horaire du Job"
-                value={ajoutjob_tarif}
-                onChangeText={(text) => setAjoutjobTarif(text)}
-            />
-            <Text style={styles.label}>Description</Text>
-            <TextInput
-            style={styles.input}
-                placeholder="Entrer la description du Job"
-                value={ajoutjob_desc}
-                onChangeText={(text) => setAjoutjobDesc(text)}
-            />
-            <TouchableOpacity 
-            onPress={() => {
-            console.log("Le BOUTTON a été PRESSE"); // Message console pour vérifier si le bouton est pressé
-            saveData();}} 
-            style={styles.buttonWrapper}>
-                <Text style={styles.buttonText}>Créer le Job</Text>
-            </TouchableOpacity>
-        </View>
+            <View style={styles.container}>
+                <Text style={styles.label}>Ajouter un Job*</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer le nom du Job"
+                    value={ajoutjob}
+                    onChangeText={(text) => setAjoutjob(text)}
+                />
+                <Text style={styles.label}>Localisation*</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer la localisation du Job"
+                    value={ajoutjob_loc}
+                    onChangeText={(text) => setAjoutjobLoc(text)}
+                />
+                <Text style={styles.label}>Catégorie</Text>
+                <FlatList
+                    data={categories}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    style={{ marginTop: 8, overflow: 'visible' }}
+                />
+                <Text style={styles.label}>Durée*</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer le nombre d'heure par semaine"
+                    value={ajoutjob_duree}
+                    onChangeText={(text) => setAjoutjobDuree(text)}
+                />
+                <Text style={styles.label}>Tarif Horaire*</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer le tarif horaire du Job"
+                    value={ajoutjob_tarif}
+                    onChangeText={(text) => setAjoutjobTarif(text)}
+                />
+                <Text style={styles.label}>Description*</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer la description du Job"
+                    value={ajoutjob_desc}
+                    onChangeText={(text) => setAjoutjobDesc(text)}
+                />
+                <Text style={styles.label}>Compétences</Text>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer les compétences du Job"
+                    value={ajoutjob_desc}
+                    onChangeText={(text) => setAjoutjobDesc(text)}
+                />
+                <Text style={styles.label}>A propos </Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Entrer A propos de votre Entreprise"
+                    value={ajoutjob_desc}
+                    onChangeText={(text) => setAjoutjobDesc(text)}
+                />
+                <TouchableOpacity
+                        onPress={() => {
+                        console.log("Le BOUTTON a été PRESSE"); // Message console pour vérifier si le bouton est pressé
+                        saveData();
+                    }}
+                    style={styles.buttonWrapper}>
+                    <Text style={styles.buttonText}>Créer le Job</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };
@@ -190,10 +205,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         marginTop: 41,
-      },
-      buttonText: {
+    },
+    buttonText: {
         color: Colors.light.background,
         fontSize: 16,
         fontWeight: '600',
-      },
+    },
 })
