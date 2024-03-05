@@ -1,9 +1,11 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { FontAwesome5 } from '@expo/vector-icons';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
+import { useRoute } from '@react-navigation/native';
+import GlobalApi from '../../Utils/GlobalApi';
 
 
 
@@ -16,6 +18,28 @@ const initiaRegion={
 
 
 export default function Map(){
+
+  const param = useRoute().params;
+
+  const [selectedTab, setSelectedTab] = useState('Description');
+  const [content, setContent] = useState<ReactNode | null>(null);
+  const [jobDetails, setJobDetails] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const result: any = await GlobalApi.getJobs();
+        const job = result.jobs.find((job: any) => job.id === param.idJob);
+        if (job) {
+          setJobDetails(job);
+        }
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      }
+    };
+  
+    fetchJobDetails();
+  }, [param.idJob]);
   return (
     <View style={styles.container}>
       <MapView 
@@ -32,7 +56,7 @@ export default function Map(){
        <FontAwesome5 name="map-pin" size={15} color="#242C5D" />
        </View>
 
-       <Text style={{ marginTop : 15, color : "#242C5D" }}>Av. 83, La valette</Text>
+       <Text style={{ marginTop : 15, color : "#242C5D" }}>{jobDetails?.jobLocation}</Text>
     </View>
     </View>
   )

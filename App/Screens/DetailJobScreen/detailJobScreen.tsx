@@ -43,8 +43,6 @@ const DetailJobScreen = () => {
       case 'Description':
         return (
           <View style={styles.DescriptionContainer}>
-            <Text></Text>
-            <Text>{jobDetails?.jobDescription}</Text>
             <DescriptionContent />
           </View>
         );
@@ -106,19 +104,22 @@ const DetailJobScreen = () => {
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-          <Text style={{ marginRight: 5, color: '#242C5D' }}>20H/Sem.</Text>
+          <Text style={{ marginRight: 5, color: '#242C5D' }}>{jobDetails?.jobHours}</Text>
           <View style={{ marginRight: 5, marginBottom: 2 }}>
             <FontAwesome5 name="circle" size={3} color='#D62528' solid />
           </View>
-          <Text style={{ marginRight: 5, color: '#242C5D' }}>AV. 83, La valette</Text>
+          <Text style={{ marginRight: 5, color: '#242C5D' }}>{jobDetails?.jobLocation}</Text>
           <View style={{ marginRight: 5, marginBottom: 2 }}>
             <FontAwesome5 name="circle" size={3} color="#D62528" solid />
           </View>
-          <Text style={{ color: '#242C5D' }}>10 candidatures</Text>
+          <Text style={{ color: '#242C5D' }}>{"10 "}</Text>
+          <Text style={{ color: '#242C5D' , fontSize:10 , marginTop:7 }}>candidature</Text>
+
+
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '500'}}>{jobDetails?.jobSalary}</Text>
+          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '450'}}>{jobDetails?.jobSalary}</Text>
           <Text style={{ color: '#242C5D' }}>/Hr</Text>
         </View>
       </View>
@@ -221,10 +222,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   titreJ: {
-    fontSize: 20,
+    fontSize: 15,
     marginTop: 10,
     color: '#242C5D',
     fontWeight: '600',
+    textAlign: 'center',
   },
   rectangle: {
     width: 390,

@@ -11,6 +11,9 @@ const getJobs = async () => {
             jobSalary
             jobHours
             companyName
+            aPropos
+            competences
+            categories
             id
             }
         }

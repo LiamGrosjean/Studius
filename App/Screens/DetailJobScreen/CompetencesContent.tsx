@@ -1,35 +1,42 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import Colors from '../../Utils/Colors';
+import { useRoute } from '@react-navigation/native';
+import GlobalApi from '../../Utils/GlobalApi';
 
 
 export default function  CompetencesContent(){
+  const param = useRoute().params;
+
+  const [selectedTab, setSelectedTab] = useState('Description');
+  const [content, setContent] = useState<ReactNode | null>(null);
+  const [jobDetails, setJobDetails] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const result: any = await GlobalApi.getJobs();
+        const job = result.jobs.find((job: any) => job.id === param.idJob);
+        if (job) {
+          setJobDetails(job);
+        }
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      }
+    };
+  
+    fetchJobDetails();
+  }, [param.idJob]);
+
     return (
-        <View style={styles.container}>
+
           <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <Text style={{fontSize: 18 ,fontWeight: '600',color: '#242C5D',marginBottom:5 }}>
-          Soft Skills
-          </Text>
             <Text style={styles.text}>
-              {"- sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Postuler Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.Postuler\n"}
-  
-            </Text>
-            <Text style={{fontSize: 18 ,fontWeight: '600',color: '#242C5D',marginBottom:5 }}>
-            Hard Skills          </Text>
-          <Text style={styles.text}>
-              {"- sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Lorem ipsum dolor sit amet consectetur. Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.\n\n"}
-  {"- Postuler Placerat pharetra sit nulla nisl rutrum orci tellus accumsan at.Postuler\n"}
-  
-            </Text>
+            {jobDetails?.competences}
+            </Text>  
             
           </ScrollView>
-        </View>
       );
     };
     
