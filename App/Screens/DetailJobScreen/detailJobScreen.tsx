@@ -43,10 +43,8 @@ const DetailJobScreen = () => {
       case 'Description':
         return (
           <View style={styles.DescriptionContainer}>
-            <Text>{jobDetails?.titre}</Text>
+            <Text></Text>
             <Text>{jobDetails?.jobDescription}</Text>
-            <Text>{jobDetails?.companyName}</Text>
-            <Text>{jobDetails?.jobSalary}</Text>
             <DescriptionContent />
           </View>
         );
@@ -72,7 +70,7 @@ const DetailJobScreen = () => {
         return null;
     }
   };
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -99,12 +97,12 @@ const DetailJobScreen = () => {
 
         <View style={styles.titleC}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}> Design UI/UX</Text>
+            <Text style={styles.title}>{jobDetails?.companyName}</Text>
           </View>
         </View>
 
         <View >
-          <Text style={styles.titreJ} >UI/UX Designer</Text>
+          <Text style={styles.titreJ}> {jobDetails?.titre}</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
@@ -120,7 +118,7 @@ const DetailJobScreen = () => {
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '500'}}>€15</Text>
+          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '500'}}>{jobDetails?.jobSalary}</Text>
           <Text style={{ color: '#242C5D' }}>/Hr</Text>
         </View>
       </View>
