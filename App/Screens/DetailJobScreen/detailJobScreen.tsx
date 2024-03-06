@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, GestureResponderEvent, Modal, Button } from 'react-native'
+import { View, Text, TouchableOpacity,Modal } from 'react-native'
 import React, { ReactNode, useState, useEffect } from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -9,7 +9,7 @@ import DescriptionContent from './DescriptionContent';
 import Colors from '../../Utils/Colors';
 import GlobalApi from '../../Utils/GlobalApi';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import Title from '../HomeScreen/title';
 
 
 const DetailJobScreen = () => {
@@ -20,6 +20,7 @@ const DetailJobScreen = () => {
   const [selectedTab, setSelectedTab] = useState('Description');
   const [content, setContent] = useState<ReactNode | null>(null);
   const [jobDetails, setJobDetails] = useState<any>(null);
+  const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -128,6 +129,8 @@ const DetailJobScreen = () => {
           <Text style={{ color: '#242C5D' }}>/Hr</Text>
         </View>
       </View>
+
+
       <View style={{ position: "absolute", bottom: 10, zIndex: 1 }}>
         <TouchableOpacity
           style={styles.buttonWrapper}
@@ -150,13 +153,25 @@ const DetailJobScreen = () => {
               <Text style={{ fontSize: 16, fontWeight: '600', color: '#242C5D', width: '100%', textAlign: 'center' }}>Candidature envoyée</Text>
               <Text style={{ color: '#242C5D', width: '100%', textAlign: 'center' }}>Votre candidature a bien été envoyée à</Text>
               <Text style={{ fontSize: 14, fontWeight: '600', color: '#242C5D', width: '100%', textAlign: 'center' }}>{jobDetails?.companyName}</Text>
+
+
+
+              <View style={{ position:'relative'}}>
+              <View style={{ marginTop:20 }}>
+                <Title titre='Offres similaires' displayLink={true} />
+              </View>
+
+
+              
+
               <TouchableOpacity
                 style={styles.buttonWrapperModal}
                 onPress={() => navigation.navigate('MesCandidatures')}
               >
                 <Text style={styles.buttonTextModal}>Afficher mes candidatures</Text>
               </TouchableOpacity>
-           
+
+              </View>
 
 
             </View>
@@ -360,7 +375,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 15,
     alignItems: 'center',
-    height: '70%',
+    height: '75%',
   },
   buttonTextModal: {
     color: Colors.light.background,
@@ -372,8 +387,10 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     marginHorizontal: 'auto',
     borderRadius: 5,
-    marginTop: 41,
-    paddingHorizontal: "20%"
+    marginTop: 280,
+    paddingHorizontal: "20%",
+    zIndex: 1,
+    position: 'absolute',
   }
 })
 
