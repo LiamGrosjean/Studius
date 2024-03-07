@@ -4,11 +4,12 @@ import HomeScreen from '../Screens/HomeScreen/HomeScreen';
 import MesCandidatures from '../Screens/ProfilScreen/MesCandidatures';
 import JobScreen from '../Screens/JobScreen/JobScreen';
 import DetailJobScreen from '../Screens/DetailJobScreen/DetailJobScreen';
+import AjouterJob from '../Screens/ProfilScreen/AjouterJob';
 
 
 const Stack = createStackNavigator();
 
-export default function HomeNavigation() {
+export default function JobNavigation() {
   return (
     <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name="home" component={HomeScreen} />

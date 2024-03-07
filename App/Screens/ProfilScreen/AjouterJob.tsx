@@ -7,7 +7,6 @@ import { FlatList } from 'react-native';
 import Header from '../HomeScreen/header';
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
-import Title from '../HomeScreen/title';
 
 
 const AjouterJob = () => {
@@ -28,6 +27,7 @@ const AjouterJob = () => {
     const [ajoutjob_aPropos, setAjoutjobaPropos] = useState('');
 
     const token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE3MDk0ODE5NzksImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbHQ3NDNzZG8wbWx3MDd1czJhcXZlbHZ1L21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LWFwLXNvdXRoZWFzdC0yLmh5Z3JhcGguY29tLyIsInN1YiI6IjA0YzZmYzM2LTdiNjYtNDdiYy04ZmFmLTc4YmU5YmM2NjNmZCIsImp0aSI6ImNsdGJwZmxkczBqc2kwNzJxZWdnejA0eW4ifQ.ZhbLRATjaBePjfjJYYUR6AaezWWDdKF4iQQEhA9KYRC77QwXHuH-SvTy72FNZngmjLxMdeFhHIQLvrC96FKEzei_kCy71KlHaKzfsJJDVHRI4hcxiTYufvlsLtb8baLhZLUKMUfV4XxY0WnFjGMJc0YGe4TVSonkgnNAOGtQEBQ__V30Fos8Sq8oHTEpGkCJfLkLfZX4i7DTnYk-S1jstP52dtxQSAle8D9JGdjuNZf6bbUNXpg7_85ltO-jN96DIImPVbr5bRLaL9kCmysyT1ewM8VhIJv_SYL_4sMVD_9GfG__2rMwbNtGC34GIED0Gqrzu2wvW832hYrRYp2DKi4egb7gwr26G-grEKKtuDl0wL3wL2O_zBk3Ky8lp5x7IVZv06sKpocq_70hBdGrsX82O0ZlapWuxk3-9Nzoy0WiMNyfrI-zrdkDpgllgjyi8gP3IkiwM53kcpPjWddSXrYxNB4egpIpOXjwVZHzlrCCtguDQxLLc6tASa1DL2eqhWZZv2lDFfJt4c29P2YiL9cQqKyyDjaooVfdw_jdGFDUbcK3jdlgpkstgfYlyDaDFdV9SlhM0m9T-Y-Qo9RtOr8wCAjY3SXIJuOEpyTuTz1gXG25iD3RzuP6XtP6YVsg1cZQPoybnVqD9Hlo-xrtzHnj2fcZuXu3Z-ZFdCrBlLo";
+    const navigation = useNavigation();
 
     const [categories, setCategories] = useState([
         { id: '1', label: 'Communication', active: false },
@@ -197,10 +197,15 @@ const AjouterJob = () => {
                     <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, alignItems: 'center' }}>
                         <Image source={require('../../../assets/images/Ajouter.png')} style={{ width: 100, height: 100, borderRadius: 9999 }} />
                         <Text>Votre offre a bien été enregistrée.</Text>
-                   <TouchableOpacity onPress={closePopup}>
-                            <Text style={{ color: 'blue', marginTop: 10 }}>Fermer</Text>
-                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                style={styles.buttonWrapperModal}
+                onPress={() => navigation.push('mes-candidatures')}
+              >
+                <Text style={styles.buttonTextModal}>Voir mes Offres</Text>
+              </TouchableOpacity>
                     </View>
+                  
                 </View>
             </Modal>
         </ScrollView>

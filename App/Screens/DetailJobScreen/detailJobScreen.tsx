@@ -125,7 +125,7 @@ const DetailJobScreen = () => {
         </View>
 
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '450' }}>{jobDetails?.jobSalary}</Text>
+          <Text style={{ marginRight: 2, color: '#242C5D', fontSize: 20, marginBottom: 7, fontWeight: '400' }}>{jobDetails?.jobSalary}</Text>
           <Text style={{ color: '#242C5D' }}>/Hr</Text>
         </View>
       </View>
@@ -166,7 +166,7 @@ const DetailJobScreen = () => {
 
               <TouchableOpacity
                 style={styles.buttonWrapperModal}
-                onPress={() => navigation.navigate('MesCandidatures')}
+                onPress={() => navigation.push('mes-candidatures')}
               >
                 <Text style={styles.buttonTextModal}>Afficher mes candidatures</Text>
               </TouchableOpacity>
