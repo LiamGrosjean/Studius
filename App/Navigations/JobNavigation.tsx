@@ -16,6 +16,7 @@ export default function JobNavigation() {
       <Stack.Screen name="mes-candidatures" component={MesCandidatures} />
       <Stack.Screen name="jobs" component={JobScreen} />
       <Stack.Screen name="DetailJobScreen" component={DetailJobScreen} />
+      <Stack.Screen name="AjouterJob" component={AjouterJob} /> {/* Ajouter cette ligne */}
     </Stack.Navigator>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Modal } from 'react-native';
+import { View, Text, TextInput, Modal, Button } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import Colors from '../../Utils/Colors';
@@ -198,14 +198,12 @@ const AjouterJob = () => {
                         <Image source={require('../../../assets/images/Ajouter.png')} style={{ width: 100, height: 100, borderRadius: 9999 }} />
                         <Text>Votre offre a bien été enregistrée.</Text>
 
-                        <TouchableOpacity
-                style={styles.buttonWrapperModal}
-                onPress={() => navigation.push('mes-candidatures')}
-              >
-                <Text style={styles.buttonTextModal}>Voir mes Offres</Text>
-              </TouchableOpacity>
+                        <Button
+                            title="Voir les offres"
+                            onPress={() => navigation.navigate('jobs')}
+                        />
                     </View>
-                  
+
                 </View>
             </Modal>
         </ScrollView>
