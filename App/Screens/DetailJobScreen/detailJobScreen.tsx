@@ -166,7 +166,8 @@ const DetailJobScreen = () => {
 
               <TouchableOpacity
                 style={styles.buttonWrapperModal}
-                onPress={() => navigation.push('mes-candidatures')}
+                onPress={() => 
+                  navigation.push('mes-candidatures')}
               >
                 <Text style={styles.buttonTextModal}>Afficher mes candidatures</Text>
               </TouchableOpacity>
