@@ -22,68 +22,68 @@ const JobScreen = () => {
         console.error("Error fetching jobs:", error);
       }
     };
-  
+
     fetchJobs();
   }, []);
   return (
     <View>
-      <Header/>
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <Search />
-            <View style={styles.container}>
-                <View>
-                    <View>
-                        <Title titre='Catégories' displayLink={true} />
-                        <Cats />
-                    </View>
-                    <View style={styles.suggestions_container}>
-                        <Title titre='Pour vous' displayLink={true} />
-                        <FlatList
-                            data={jobs as any[]} // Add type assertion to 'any[]'
-                            style={{backgroundColor: Colors.light.background, overflow: 'visible',}}
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
-                                <JobCard 
-                                    maxWidth={300}
-                                    title={item.titre} 
-                                    company={item.companyName} 
-                                    description={item.jobDescription} 
-                                    emplacement={item.jobLocation}
-                                    hSemaine={item.jobHours}
-                                    hSalaire={item.jobSalary}
-                                    jobLien=''
-                                    id={item.id}
-                                />
-                            )}
-                        />
-                    <View style={{marginTop: 26}}>
-                        <Title titre='Jobs récents' displayLink={true}/>
-                        <FlatList
-                            data={jobs as any[]} // Add type assertion to 'any[]'
-                            style={{backgroundColor: Colors.light.background, overflow: 'visible', paddingBottom: 50,}}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
-                                <JobCard 
-                                    title={item.titre} 
-                                    company={item.companyName} 
-                                    description={item.jobDescription} 
-                                    emplacement={item.jobLocation}
-                                    hSemaine={item.jobHours}
-                                    hSalaire={item.jobSalary}
-                                    jobLien=''
-                                    id={item.id}
-                                />
-                            )}
-                        />
-                    </View>
-                  </View>
-                </View>
+      <Header />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Search />
+        <View style={styles.container}>
+          <View>
+            <View>
+              <Title titre='Catégories' displayLink={true} />
+              <Cats />
             </View>
-        </ScrollView>
-  </View>
+            <View style={styles.suggestions_container}>
+              <Title titre='Pour vous' displayLink={true} />
+              <FlatList
+                data={jobs as any[]} // Add type assertion to 'any[]'
+                style={{ backgroundColor: Colors.light.background, overflow: 'visible', }}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                  <JobCard
+                    maxWidth={300}
+                    title={item.titre}
+                    company={item.companyName}
+                    description={item.jobDescription}
+                    emplacement={item.jobLocation}
+                    hSemaine={item.jobHours}
+                    hSalaire={item.jobSalary}
+                    jobLien=''
+                    id={item.id}
+                  />
+                )}
+              />
+              <View style={{ marginTop: 26 }}>
+                <Title titre='Jobs récents' displayLink={true} />
+                <FlatList
+                  data={jobs as any[]} // Add type assertion to 'any[]'
+                  style={{ backgroundColor: Colors.light.background, overflow: 'visible', paddingBottom: 50, }}
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <JobCard
+                      title={item.titre}
+                      company={item.companyName}
+                      description={item.jobDescription}
+                      emplacement={item.jobLocation}
+                      hSemaine={item.jobHours}
+                      hSalaire={item.jobSalary}
+                      jobLien=''
+                      id={item.id}
+                    />
+                  )}
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 33,
     backgroundColor: Colors.light.background,
   },
-  suggestions_container : {
+  suggestions_container: {
     paddingTop: 36,
     gap: 16,
   },
