@@ -18,7 +18,7 @@ const JobCard = ({ maxWidth, id, title, company, description, emplacement, hSema
   const truncatedTitle = title.length > 40 ? title.substring(0, 40) + '...' : title;
 
     return (
-      <TouchableOpacity onPress={() => { navigation.push('DetailJobScreen',{idJob:id})}}>
+      <TouchableOpacity onPress={() => { navigation.navigate('DetailJobScreen',{idJob:id})}}>
             <View style={[styles.container, { maxWidth }]}>
                 <View style={styles.subContainer}>
                     <View style={styles.brandContainer}>

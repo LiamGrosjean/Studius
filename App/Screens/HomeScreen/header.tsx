@@ -1,34 +1,36 @@
-import { View, Text, StyleSheet, Image, Modal,TouchableOpacity} from 'react-native'
-import React from 'react'
-import { FontAwesome5 } from '@expo/vector-icons'
-import Colors from '../../Utils/Colors'
-import { useNavigation } from '@react-navigation/native'
-import TabNavigation from '../../Navigations/TabNavigation';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { FontAwesome5 } from '@expo/vector-icons';
+import Colors from '../../Utils/Colors';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../Navigations/navigationTypes'; // Assurez-vous que le chemin est correct
+
+type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'profil-screen'>;
 
 const Header = () => {
-    const navigation = useNavigation<TabNavigation>()
+    const navigation = useNavigation<ProfileScreenNavigationProp>();
     return (
         <View style={styles.container}>
             <View style={styles.profilContainer}>
-                    <TouchableOpacity style={styles.navContainer} onPress={() => navigation.push('profil-screen')}>
-                        <View style={styles.imageWrapper}>
-                            <Image source={require('../../../assets/images/userImage.jpeg')} style={styles.userImage} />
-                            <View style={styles.userImage} />
-                        </View>
-                        <View style={styles.divider} />
-                            <View>
-                                <Text style={styles.text}>Bienvenue,</Text>
-                                <Text style={styles.name}>Elisa</Text>
-                            </View>
-                    </TouchableOpacity>
-                
+                <TouchableOpacity style={styles.navContainer} onPress={() => navigation.navigate('profil-screen')}>
+                    <View style={styles.imageWrapper}>
+                        <Image source={require('../../../assets/images/userImage.jpeg')} style={styles.userImage} />
+                        <View style={styles.userImage} />
+                    </View>
+                    <View style={styles.divider} />
+                    <View>
+                        <Text style={styles.text}>Bienvenue,</Text>
+                        <Text style={styles.name}>Elisa</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.headerWrapper}>
                 <FontAwesome5 name="bell" size={13} color={Colors.light.primary} />
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -87,6 +89,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-})
+});
 
-export default Header
+export default Header;

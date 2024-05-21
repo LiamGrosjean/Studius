@@ -8,6 +8,7 @@ import MesCandidatures from '../Screens/ProfilScreen/MesCandidatures';
 import JobScreen from '../Screens/JobScreen/JobScreen';
 import DetailJobScreen from '../Screens/DetailJobScreen/DetailJobScreen';
 import AjouterJob from '../Screens/ProfilScreen/AjouterJob';
+import LoginScreen from '../Screens/LoginScreen/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function HomeNavigation() {
       <Stack.Screen name="jobs" component={JobScreen} />
       <Stack.Screen name="DetailJobScreen" component={DetailJobScreen} />
       <Stack.Screen name="AjouterJob" component={AjouterJob} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   )
 }

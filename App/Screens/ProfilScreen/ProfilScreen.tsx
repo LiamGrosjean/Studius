@@ -6,6 +6,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from '../../Utils/Colors'
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import LoginScreen from '../LoginScreen/LoginScreen';
 
 
 const ProfileScreen = () => {
@@ -35,8 +36,8 @@ const ProfileScreen = () => {
             <Text style={{ fontSize: 16, color: Colors.light.primary }}>   Mes Logements</Text>
           </TouchableOpacity>
           <View>
-            <Button title='Ajouter un job' onPress={() => navigation.push('AjouterJob')} />
-            <Button title='Se connecter' onPress={() => navigation.push('login')} />
+            <Button title='Ajouter un job' onPress={() => navigation.navigate('AjouterJob')} />
+            <Button title='Se connecter' onPress={() => navigation.navigate('LoginScreen')} />
             <Button title='Se déconnecter' onPress={() => signOut()} />
           </View>
         </View>
